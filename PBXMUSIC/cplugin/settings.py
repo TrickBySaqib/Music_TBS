@@ -8,6 +8,7 @@ from pyrogram.types import (
     Message,
 )
 
+from PBXMUSIC import app
 from PBXMUSIC.utils.database import (
     add_nonadmin_chat,
     get_authuser,

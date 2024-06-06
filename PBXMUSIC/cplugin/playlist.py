@@ -1,16 +1,26 @@
 import os
 import requests
 from random import randint
+from PBXMUSIC.utils.database import (
+    add_served_chat_clone,
+    add_served_user_clone,
+    blacklisted_chats,
+    get_lang,
+    is_banned_user,
+    is_on_off,
+)
 
 from pykeyboard import InlineKeyboard
 from pyrogram import filters, Client
 from pyrogram.types import (
     InlineKeyboardButton,
+    CallbackQuery,
     InlineKeyboardMarkup,
     Message,
 )
+from PBXMUSIC.utils import close_markup
 from config import BANNED_USERS, SERVER_PLAYLIST_LIMIT
-from PBXMUSIC import Carbon
+from PBXMUSIC import Carbon, app
 from PBXMUSIC.utils.decorators.language import language, languageCB
 from PBXMUSIC.utils.inline.playlist import (
     botplaylist_markup,
@@ -20,12 +30,16 @@ from PBXMUSIC.utils.inline.playlist import (
 from PBXMUSIC.utils.pastebin import PBXBin
 import time
 import asyncio
+import yt_dlp
 from youtube_search import YoutubeSearch
+from youtubesearchpython import VideosSearch
+from youtubesearchpython import SearchVideos
 
 from PBXMUSIC.utils.stream.stream import stream
 from typing import Dict, List, Union
 from time import time
 import asyncio
+from PBXMUSIC.utils.extraction import extract_user
 
 # Define a dictionary to track the last message timestamp for each user
 user_last_message_time = {}
@@ -321,6 +335,9 @@ async def play_playlist_command_clone(client, message, _):
     return await mystic.delete()
 
 
+import json
+
+
 # Combined add_playlist function
 @Client.on_message(filters.command(["addplaylist", "addplist"]) & ~BANNED_USERS)
 @language
@@ -386,6 +403,7 @@ async def add_playlist_clone(client: Client, message: Message, _):
             text="**➻ ᴀʟʟ sᴏɴɢs ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ ғʀᴏᴍ ʏᴏᴜʀ ʏᴏᴜᴛᴜʙᴇ ᴘʟᴀʏʟɪsᴛ ʟɪɴᴋ✅**\n\n**➥ ɪғ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴀɴʏ sᴏɴɢ ᴛʜᴇɴ ᴄʟɪᴄᴋ ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ.\n\n**▷ ᴄʜᴇᴄᴋ ʙʏ » /playlist**\n\n▷ **ᴘʟᴀʏ ʙʏ » /play**",
             reply_markup=keyboardes,
         )
+        pass
 
     if "youtube.com/@" in query:
         addin = await message.reply_text(
@@ -440,6 +458,7 @@ async def add_playlist_clone(client: Client, message: Message, _):
             text="**➻ ᴀʟʟ sᴏɴɢs ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ ғʀᴏᴍ ʏᴏᴜʀ ʏᴏᴜᴛᴜʙᴇ channel ʟɪɴᴋ✅**\n\n**➥ ɪғ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴀɴʏ sᴏɴɢ ᴛʜᴇɴ ᴄʟɪᴄᴋ ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ.\n\n**▷ ᴄʜᴇᴄᴋ ʙʏ » /playlist**\n\n▷ **ᴘʟᴀʏ ʙʏ » /play**",
             reply_markup=keyboardes,
         )
+        pass
 
     # Check if the provided input is a YouTube video link
     if "https://youtu.be" in query:
@@ -506,6 +525,7 @@ async def add_playlist_clone(client: Client, message: Message, _):
                 await message.reply_text(str(e))
         except Exception as e:
             return await message.reply_text(str(e))
+            pass
     else:
         from PBXMUSIC import YouTube
 
@@ -767,6 +787,7 @@ async def delete_all_playlists_clone(client, message, _):
         # If more than the spam window time has passed, reset the command count and update the message timestamp
         user_command_count[user_id] = 1
         user_last_message_time[user_id] = current_time
+    from PBXMUSIC import YouTube
 
     _playlist = await get_playlist_names_clone(user_id)
     if _playlist:
@@ -782,7 +803,7 @@ async def delete_all_playlists_clone(client, message, _):
 @Client.on_callback_query(filters.regex("del_playlist") & ~BANNED_USERS)
 @languageCB
 async def del_plist_clone(client, CallbackQuery, _):
-    pass
+    from PBXMUSIC import YouTube
 
     callback_data = CallbackQuery.data.strip()
     videoid = callback_data.split(None, 1)[1]
@@ -805,7 +826,7 @@ async def del_plist_clone(client, CallbackQuery, _):
 @Client.on_callback_query(filters.regex("delete_whole_playlist") & ~BANNED_USERS)
 @languageCB
 async def del_whole_playlist_clone(client, CallbackQuery, _):
-    pass
+    from PBXMUSIC import YouTube
 
     _playlist = await get_playlist_names_clone(CallbackQuery.from_user.id)
     for x in _playlist:
@@ -832,7 +853,7 @@ async def get_playlist_playmode_clone(client, CallbackQuery, _):
 @Client.on_callback_query(filters.regex("delete_warning") & ~BANNED_USERS)
 @languageCB
 async def delete_warning_message_clone(client, CallbackQuery, _):
-    pass
+    from PBXMUSIC import YouTube
 
     try:
         await CallbackQuery.answer()
@@ -845,7 +866,7 @@ async def delete_warning_message_clone(client, CallbackQuery, _):
 @Client.on_callback_query(filters.regex("home_play") & ~BANNED_USERS)
 @languageCB
 async def home_play_clone(client, CallbackQuery, _):
-    pass
+    from PBXMUSIC import YouTube
 
     try:
         await CallbackQuery.answer()
@@ -860,7 +881,7 @@ async def home_play_clone(client, CallbackQuery, _):
 @Client.on_callback_query(filters.regex("del_back_playlist") & ~BANNED_USERS)
 @languageCB
 async def del_back_playlist_clone(client, CallbackQuery, _):
-    pass
+    from PBXMUSIC import YouTube
 
     user_id = CallbackQuery.from_user.id
     _playlist = await get_playlist_names_clone(user_id)

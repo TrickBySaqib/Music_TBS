@@ -4,7 +4,8 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 from youtubesearchpython.__future__ import VideosSearch
-from pyrogram import Client
+from pyrogram import filters, Client
+from PBXMUSIC import app
 from PBXMUSIC.utils.inlinequery import answer
 from config import BANNED_USERS
 

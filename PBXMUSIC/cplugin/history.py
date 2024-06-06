@@ -4,6 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram.raw.functions.messages import DeleteHistory
 
+from PBXMUSIC import app
 from PBXMUSIC.core.userbot import assistants
 from PBXMUSIC.utils.database import get_client
 
