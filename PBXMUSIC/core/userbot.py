@@ -1,15 +1,15 @@
+from pyrogram import Client
+import re
 import asyncio
 from os import getenv
-
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
-from pyrogram import Client
+from pyrogram import filters
 
 load_dotenv()
-from dotenv import load_dotenv
-
 import config
+from dotenv import load_dotenv
 from strings.__init__ import LOGGERS
-
 from ..logging import LOGGER
 
 BOT_TOKEN = getenv("BOT_TOKEN", "")
@@ -24,40 +24,39 @@ assistantids = []
 class Userbot(Client):
     def __init__(self):
         self.one = Client(
-            name="PBXAss1",
+            name="VIPAss1",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
-            no_updates=False,
-            plugins=dict(root="PBXMUSIC.plugins.USERBOT"),
+            no_updates=True,
         )
         self.two = Client(
-            name="PBXAss2",
+            name="VIPAss2",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
-            no_updates=False,
+            no_updates=True,
         )
         self.three = Client(
-            name="PBXAss3",
+            name="VIPAss3",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
-            no_updates=False,
+            no_updates=True,
         )
         self.four = Client(
-            name="PBXAss4",
+            name="VIPAss4",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
-            no_updates=False,
+            no_updates=True,
         )
         self.five = Client(
-            name="PBXAss5",
+            name="VIPAss5",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
-            no_updates=False,
+            no_updates=True,
         )
 
     async def start(self):
@@ -66,10 +65,10 @@ class Userbot(Client):
         if config.STRING1:
             await self.one.start()
             try:
-                await self.one.join_chat("THE_PUNJABI_BANDE")
-                await self.one.join_chat("THE_PUNJABI_BANDE")
-                await self.one.join_chat("THE_PUNJABI_BANDE")
-                await self.one.join_chat("THE_PUNJABI_BANDE")
+                await self.one.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.one.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.one.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.one.join_chat("STYLISH_FOUT_CHANNEL")
 
             except:
                 pass
@@ -96,10 +95,10 @@ class Userbot(Client):
         if config.STRING2:
             await self.two.start()
             try:
-                await self.two.join_chat("THE_PUNJABI_BANDE")
-                await self.two.join_chat("THE_PUNJABI_BANDE")
-                await self.two.join_chat("THE_PUNJABI_BANDE")
-                await self.two.join_chat("THE_PUNJABI_BANDE")
+                await self.two.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.two.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.two.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.two.join_chat("STYLISH_FOUT_CHANNEL")
             except:
                 pass
             assistants.append(2)
@@ -120,10 +119,10 @@ class Userbot(Client):
         if config.STRING3:
             await self.three.start()
             try:
-                await self.three.join_chat("THE_PUNJABI_BANDE")
-                await self.three.join_chat("THE_PUNJABI_BANDE")
-                await self.three.join_chat("THE_PUNJABI_BANDE")
-                await self.three.join_chat("THE_PUNJABI_BANDE")
+                await self.three.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.three.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.three.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.three.join_chat("STYLISH_FOUT_CHANNEL")
             except:
                 pass
             assistants.append(3)
@@ -145,10 +144,10 @@ class Userbot(Client):
         if config.STRING4:
             await self.four.start()
             try:
-                await self.four.join_chat("THE_PUNJABI_BANDE")
-                await self.four.join_chat("THE_PUNJABI_BANDE")
-                await self.four.join_chat("THE_PUNJABI_BANDE")
-                await self.four.join_chat("THE_PUNJABI_BANDE")
+                await self.four.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.four.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.four.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.four.join_chat("STYLISH_FOUT_CHANNEL")
             except:
                 pass
             assistants.append(4)
@@ -170,10 +169,10 @@ class Userbot(Client):
         if config.STRING5:
             await self.five.start()
             try:
-                await self.five.join_chat("THE_PUNJABI_BANDE")
-                await self.five.join_chat("THE_PUNJABI_BANDE")
-                await self.five.join_chat("THE_PUNJABI_BANDE")
-                await self.five.join_chat("testbotbad")
+                await self.five.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.five.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.five.join_chat("STYLISH_FOUT_CHANNEL")
+                await self.five.join_chat("OWNER_TBS")
             except:
                 pass
             assistants.append(5)
