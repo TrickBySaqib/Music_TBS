@@ -1,7 +1,12 @@
+import logging
 from pyrogram.types import Message
 from youtube_search import YoutubeSearch
 from PBXMUSIC import app
 from pyrogram import filters
+from config import BOT_USERNAME
+
+
+
 
 
 @app.on_message(filters.command("search"))
@@ -25,3 +30,5 @@ async def ytsearch(_, message: Message):
         await m.edit(text, disable_web_page_preview=True)
     except Exception as e:
         await m.edit(str(e))
+      
+      
