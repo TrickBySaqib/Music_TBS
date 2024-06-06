@@ -27,8 +27,8 @@ pyfiglet
 qrcode
 pytz
 future==0.18.3
-py-tgcalls==1.2.9
-ntgcalls==1.1.2
+search_engine_parser
+py-tgcalls
 pykeyboard
 pyshorteners
 pyrogram==2.0.106
