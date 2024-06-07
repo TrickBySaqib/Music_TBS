@@ -1,19 +1,16 @@
 import asyncio
 import importlib
-from sys import argv
+
 from pyrogram import idle
-from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
+from config import BANNED_USERS
 from PBXMUSIC import LOGGER, app, userbot
 from PBXMUSIC.core.call import PBX
 from PBXMUSIC.misc import sudo
 from PBXMUSIC.plugins import ALL_MODULES
-from PBXMUSIC.utils.database import get_banned_users, get_gbanned
-from config import BANNED_USERS
-
 from PBXMUSIC.plugins.tools.clone import restart_bots
-
+from PBXMUSIC.utils.database import get_banned_users, get_gbanned
 
 
 async def init():
